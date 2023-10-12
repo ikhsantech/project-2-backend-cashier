@@ -70,7 +70,7 @@ class CategoryController extends Controller
           $data = $category->update();
             return response()->json(['status' => true, 'message' => 'data berhasil di update', 'data' => $data]);
         }catch (Exception | PDOException $e) {
-            return response()->json(['status' => false, 'message' => 'gagal update data','error_type'=> $e]);
+            return response()->json(['status' => false, 'message' => 'Data Gagal Di Update','error_type'=> $e]);
         }
     }
 
