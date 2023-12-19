@@ -2,13 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\category;
-use Illuminate\Http\Request;
-use App\Http\Requests\CategoryRequest;
+use App\Models\meja;
+use App\Http\Requests\MejaRequest;
 use Exception;
 use PDOException;
 
-class CategoryController extends Controller
+class MejaController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,7 +15,7 @@ class CategoryController extends Controller
     public function index()
     {
         try {
-            $data = Category::get();
+            $data = meja::get();
             return response()->json(['status' => true, 'message' => 'success', 'data' => $data]);
         }catch (Exception | PDOException $e) {
             return response()->json(['status' => false, 'message' => 'gagal menampilkan data']);
@@ -34,10 +33,10 @@ class CategoryController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(MejaRequest $request)
     {
-         try {
-          $data = Category::create($request->all());
+        try {
+          $data = Meja::create($request->all());
             return response()->json(['status' => true, 'message' => 'success', 'data' => $data]);
         }catch (Exception | PDOException $e) {
             return response()->json(['status' => false, 'message' => 'gagal menampilkan data']);
@@ -47,7 +46,7 @@ class CategoryController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(category $category)
+    public function show(meja $meja)
     {
         //
     }
@@ -55,7 +54,7 @@ class CategoryController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(category $category)
+    public function edit(meja $meja)
     {
         //
     }
@@ -63,12 +62,10 @@ class CategoryController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(CategoryRequest $request, Category $category)
+    public function update(MejaRequest $request, meja $meja)
     {
-
-             try {
-                $validate =$request->validated();
-          $data = $category->update($validate);
+         try {
+          $data = $meja->update();
             return response()->json(['status' => true, 'message' => 'data berhasil di update', 'data' => $data]);
         }catch (Exception | PDOException $e) {
             return response()->json(['status' => false, 'message' => 'Data Gagal Di Update','error_type'=> $e]);
@@ -78,10 +75,10 @@ class CategoryController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(category $category)
+    public function destroy(meja $meja)
     {
-       try {
-          $data = $category->delete();
+         try {
+          $data = $meja->delete();
             return response()->json(['status' => true, 'message' => 'delete data sukses', 'data' => $data]);
         }catch (Exception | PDOException $e) {
             return response()->json(['status' => false, 'message' => 'gagal delete data','error_type'=> $e]);

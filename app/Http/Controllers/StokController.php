@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\category;
+use App\Models\stok;
 use Illuminate\Http\Request;
-use App\Http\Requests\CategoryRequest;
+use App\Http\Requests\StokRequest;
 use Exception;
 use PDOException;
 
-class CategoryController extends Controller
+class StokController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,7 +16,7 @@ class CategoryController extends Controller
     public function index()
     {
         try {
-            $data = Category::get();
+            $data = stok::get();
             return response()->json(['status' => true, 'message' => 'success', 'data' => $data]);
         }catch (Exception | PDOException $e) {
             return response()->json(['status' => false, 'message' => 'gagal menampilkan data']);
@@ -34,10 +34,10 @@ class CategoryController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StokRequest $request)
     {
-         try {
-          $data = Category::create($request->all());
+      try {
+          $data = Stok::create($request->all());
             return response()->json(['status' => true, 'message' => 'success', 'data' => $data]);
         }catch (Exception | PDOException $e) {
             return response()->json(['status' => false, 'message' => 'gagal menampilkan data']);
@@ -47,7 +47,7 @@ class CategoryController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(category $category)
+    public function show(stok $stok)
     {
         //
     }
@@ -55,7 +55,7 @@ class CategoryController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(category $category)
+    public function edit(stok $stok)
     {
         //
     }
@@ -63,12 +63,10 @@ class CategoryController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(CategoryRequest $request, Category $category)
+    public function update(StokRequest $request, stok $stok)
     {
-
-             try {
-                $validate =$request->validated();
-          $data = $category->update($validate);
+   try {
+          $data = $stok->update();
             return response()->json(['status' => true, 'message' => 'data berhasil di update', 'data' => $data]);
         }catch (Exception | PDOException $e) {
             return response()->json(['status' => false, 'message' => 'Data Gagal Di Update','error_type'=> $e]);
@@ -78,10 +76,10 @@ class CategoryController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(category $category)
+    public function destroy(stok $stok)
     {
        try {
-          $data = $category->delete();
+          $data = $stok->delete();
             return response()->json(['status' => true, 'message' => 'delete data sukses', 'data' => $data]);
         }catch (Exception | PDOException $e) {
             return response()->json(['status' => false, 'message' => 'gagal delete data','error_type'=> $e]);

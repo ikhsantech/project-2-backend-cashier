@@ -2,21 +2,21 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\category;
+use App\Models\menu;
 use Illuminate\Http\Request;
-use App\Http\Requests\CategoryRequest;
+use App\Http\Requests\MenuRequest;
 use Exception;
 use PDOException;
 
-class CategoryController extends Controller
+class MenuController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        try {
-            $data = Category::get();
+       try {
+            $data = Menu::get();
             return response()->json(['status' => true, 'message' => 'success', 'data' => $data]);
         }catch (Exception | PDOException $e) {
             return response()->json(['status' => false, 'message' => 'gagal menampilkan data']);
@@ -37,7 +37,7 @@ class CategoryController extends Controller
     public function store(Request $request)
     {
          try {
-          $data = Category::create($request->all());
+          $data = Menu::create($request->all());
             return response()->json(['status' => true, 'message' => 'success', 'data' => $data]);
         }catch (Exception | PDOException $e) {
             return response()->json(['status' => false, 'message' => 'gagal menampilkan data']);
@@ -47,7 +47,7 @@ class CategoryController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(category $category)
+    public function show(menu $menu)
     {
         //
     }
@@ -55,7 +55,7 @@ class CategoryController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(category $category)
+    public function edit(menu $menu)
     {
         //
     }
@@ -63,12 +63,11 @@ class CategoryController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(CategoryRequest $request, Category $category)
+    public function update(MenuRequest $request, menu $menu)
     {
-
-             try {
-                $validate =$request->validated();
-          $data = $category->update($validate);
+     try {
+          $validate =$request->validated();
+          $data = $menu->update($validate);
             return response()->json(['status' => true, 'message' => 'data berhasil di update', 'data' => $data]);
         }catch (Exception | PDOException $e) {
             return response()->json(['status' => false, 'message' => 'Data Gagal Di Update','error_type'=> $e]);
@@ -78,10 +77,10 @@ class CategoryController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(category $category)
+    public function destroy(menu $menu)
     {
-       try {
-          $data = $category->delete();
+        try {
+          $data = $menu->delete();
             return response()->json(['status' => true, 'message' => 'delete data sukses', 'data' => $data]);
         }catch (Exception | PDOException $e) {
             return response()->json(['status' => false, 'message' => 'gagal delete data','error_type'=> $e]);
